@@ -2,7 +2,7 @@ phina.globalize();
 
 var G = 1.5;   // 重力
 var Ex = 0.5; // 反発係数
-var Ey = 0.3;
+var Ey = 0.2;
 var M = 1;   // 動摩擦係数
 var Eps = 0.01;
 var SCREEN_HEIGHT = 960;
@@ -124,8 +124,8 @@ phina.define('Fruit', {
       return Collision.testCircleCircle(other, i) && other.left > 0 && other.right < SCREEN_WIDTH;
     });
     if(changeVThis){
-      const tvx = this.v() * dx / (this.radius * 2);
-      const tvy = this.v() * dy / (this.radius * 2);
+      const tvx = this.v() * dx / (r1 + r2);
+      const tvy = this.v() * dy / (r1 + r2);
       this.vx = tvx * Ex;
       this.vy = tvy * Ey;
       if(this.v() < Eps){
@@ -137,8 +137,8 @@ phina.define('Fruit', {
       this.vy = 0;
     }
     if(changeVOther){
-      const ovx = other.v() * dx / (other.radius * 2);
-      const ovy = other.v() * dy / (other.radius * 2);
+      const ovx = other.v() * dx / (r1 + r2);
+      const ovy = other.v() * dy / (r1 + r2);
       other.vx = -1 * ovx * Ex;
       other.vy = -1 * ovy * Ey;
       if(other.v() < Eps){

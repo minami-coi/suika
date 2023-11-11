@@ -92,8 +92,8 @@ phina.define('Fruit', {
     }
     if(this.fruit_id === other.fruit_id && this.next){
       scene.score += this.score;
-      const x = this.x;
-      const y = this.y;
+      const x = (this.x + other.x) / 2;
+      const y = (this.y + other.y) / 2;
       const new_fruit = Fruit({...(fruitType[this.next])}.$safe({x, y}));
       const new_fruits = scene.fruits.filter((f) => f.id != this.id && f.id != other.id);
       new_fruits.push(new_fruit)

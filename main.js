@@ -115,37 +115,19 @@ phina.define('Fruit', {
         other.y -= ddy;
       }
     }
-    const changeVThis = fruits.length < 3 || !fruits.some((i) => {
-      if(i.id == this.id || i.id == other.id) return false;
-      return Collision.testCircleCircle(this, i) && this.left > 0 && this.right < SCREEN_WIDTH;
-    });
-    const changeVOther = fruits.length < 3 || !fruits.some((i) => {
-      if(i.id == this.id || i.id == other.id) return false;
-      return Collision.testCircleCircle(other, i) && other.left > 0 && other.right < SCREEN_WIDTH;
-    });
-    if(changeVThis){
-      const tvx = this.v() * dx / (r1 + r2);
-      const tvy = this.v() * dy / (r1 + r2);
-      this.vx = tvx * Ex;
-      this.vy = tvy * Ey;
-      if(this.v() < Eps){
-        this.vx = 0;
-        this.vy = 0;
-      }
-    }else{
+    const tvx = this.v() * dx / (r1 + r2);
+    const tvy = this.v() * dy / (r1 + r2);
+    this.vx = tvx * Ex;
+    this.vy = tvy * Ey;
+    if(this.v() < Eps){
       this.vx = 0;
       this.vy = 0;
     }
-    if(changeVOther){
-      const ovx = other.v() * dx / (r1 + r2);
-      const ovy = other.v() * dy / (r1 + r2);
-      other.vx = -1 * ovx * Ex;
-      other.vy = -1 * ovy * Ey;
-      if(other.v() < Eps){
-        other.vx = 0;
-        other.vy = 0;
-      }
-    }else{
+    const ovx = other.v() * dx / (r1 + r2);
+    const ovy = other.v() * dy / (r1 + r2);
+    other.vx = -1 * ovx * Ex;
+    other.vy = -1 * ovy * Ey;
+    if(other.v() < Eps){
       other.vx = 0;
       other.vy = 0;
     }
